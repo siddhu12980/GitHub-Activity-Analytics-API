@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fast-server-service
+spec:
+  selector:
+    app: fast-server
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fast-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fast-server
+  template:
+    metadata:
+      labels:
+        app: fast-server
+    spec:
+      containers:
+      - name: fast-server
+        image: siddjuugi/fastapi-github:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: my-config
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
