@@ -42,6 +42,7 @@ async def login_with_github():
     client_id = os.getenv("GITHUB_CLIENT_ID")
     redirect_uri = os.getenv("GITHUB_REDIRECT_URI")
     link = f"https://github.com/login/oauth/authorize?client_id={client_id}&response_type=code&scope=repo%20user&redirect_uri={redirect_uri}"
+    print(link)
     response = RedirectResponse(url=link)
     return response
 
@@ -88,7 +89,7 @@ async def auth_with_github(code:str ):
     
     print(f"User Info: {user_info}")
     
-    return RedirectResponse("/")
+    return RedirectResponse("/test/user")
     
    
 

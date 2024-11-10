@@ -11,6 +11,7 @@ from app.routes import routes
 
 
 class MyFastAPI(FastAPI):
+    
     # GITHUB_CLIENT_ID: Optional[str] = None
     # GITHUB_CLIENT_SECRET: Optional[str] = None
     # GITHUB_REDIRECT_URI: Optional[str] = None
@@ -37,7 +38,10 @@ app = MyFastAPI(
     title="Auth",
     description="Auth",
     version="1.0.0",
-    lifespan=lifespan
+    lifespan=lifespan,
+    docs_url='/docs',
+    openapi_url='/openapi.json',
+    root_path='/test'
 )
 
 app.add_middleware(
